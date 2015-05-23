@@ -16,7 +16,7 @@ def distance(x, y):
 class NDFunction:
     def __init__(self, M, rho, gamma, t, globl):
         """
-        Create an ND-type function with the specified parameters.
+        Create an not diferentiable (ND-type) function with the specified parameters.
 
         :param M: An m x n matrix with coordinates for local minimizers, including the main paraboloid.
         :type M: m x n double matrix
@@ -43,8 +43,14 @@ class NDFunction:
         return ndtype_call(self, x)
 
 class DFunction(NDFunction):
+    """One time differentiable (D-type) function."""
     def __call__(self, x):
         return dtype_call(self, x)
+
+# class D2Function(NDFunction):
+#     """Two times differentiable functions."""
+#     def __call__(self, x):
+#         return ndtype_call(self, x)
 
 def random_ndfunction(n, m, globl, radius, dist):
     """
