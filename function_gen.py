@@ -68,6 +68,12 @@ def random_ndfunction(n, m, globl, radius, dist):
     :type dist: float
 
     :returns: callable -- ND type function with the given parameters and other parameters randomized.
+
+    Note: this function generator generates different functions (if the same
+    parameters are provided) than its C++ equivalent - GKLS function generator
+    described in "Global Search Based on Efficient Diagonal Partitions and a
+    Set of Lipschitz Constants" by Yaroslav D. Sergeyev and Dmitri E. Kvasov
+    (its implementation is provided by Y. Sergeyev, see http://wwwinfo.deis.unical.it/~yaro/GKLS.html).
     """
     assert(n >= 2)
     assert(m >= 2)
@@ -120,7 +126,7 @@ def random_ndfunction(n, m, globl, radius, dist):
 
 
 if __name__ == '__main__':
-    f1, f2 = random_ndfunction(n=2, m=10, globl=-1.0, radius=1.0/3.0, dist=2.0/3.0)
+    f1, f2 = random_ndfunction(n=2, m=10, globl=-1.0, radius=0.2, dist=0.9)
     X, Y = np.meshgrid(np.arange(-1.0, 1.0, 0.05), np.arange(-1.0, 1.0, 0.05))
     Z1 = np.array([[f1(np.array([x0, x1])) for x0, x1 in zip(row1, row2)] for row1, row2 in zip(X, Y)])
     Z2 = np.array([[f2(np.array([x0, x1])) for x0, x1 in zip(row1, row2)] for row1, row2 in zip(X, Y)])
